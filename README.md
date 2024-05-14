@@ -13,7 +13,7 @@ This repository contains a set of Python scripts that are designed to test poten
 ## 3. **code3.py**
    - Description: [Provide a brief description of what code3.py is supposed to do.]
 
-## Usage
+# Usage
 
 To run any of the scripts, use the following command in your terminal:
 
