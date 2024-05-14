@@ -4,13 +4,13 @@ This repository contains a set of Python scripts that are designed to test poten
 
 ## Files
 
-1. **code1.py**
+## 1. **code1.py**
    - Description: [Provide a brief description of what code1.py is supposed to do.]
 
-2. **code2.py**
+## 2. **code2.py**
    - Description: [Provide a brief description of what code2.py is supposed to do.]
 
-3. **code3.py**
+## 3. **code3.py**
    - Description: [Provide a brief description of what code3.py is supposed to do.]
 
 ## Usage
