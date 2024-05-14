@@ -1,0 +1,148 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from scipy.spatial import cKDTree
+
+
+# Define parameters
+num_units = 100
+num_iterations = 300
+max_speed = 0.02
+min_speed = -0.02
+neighbor_distance = 0.1
+swarm_center = np.array([0.5, 0.5])  # Center of the simulation area
+alignment_factor = 0.015  # Factor influencing alignment behavior
+cohesion_factor = 0.015   # Factor influencing cohesion behavior
+separation_factor = 0.02 # Factor influencing separation behavior
+trail_decay = 0.95  # Trail decay factor
+building_repulsion = 0.01  # Factor influencing building avoidance behavior
+
+
+# Generate urban landscape (random buildings)
+def generate_buildings(num_buildings, min_size=0.01, max_size=0.1):
+    buildings = []
+    for _ in range(num_buildings):
+        size = np.random.uniform(min_size, max_size)
+        x = np.random.uniform(0, 1 - size)
+        y = np.random.uniform(0, 1 - size)
+        buildings.append((x, y, size))
+    return buildings
+
+
+# Generate military unit positions
+def generate_unit_positions(num_units):
+    return np.random.rand(num_units, 2)
+
+
+# Initialize unit positions and velocities
+positions = generate_unit_positions(num_units)
+velocities = np.random.uniform(min_speed, max_speed, (num_units, 2))
+
+
+# Initialize KD-tree for efficient nearest neighbor queries
+kdtree = cKDTree(positions)
+
+
+# Initialize figure and axis
+fig, ax = plt.subplots()
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+
+
+# Create empty lists to store trail data
+trail_segments = []
+
+
+# Generate urban landscape
+buildings = generate_buildings(30)  # Adjust the number of buildings as needed
+
+
+# Plot buildings
+for building in buildings:
+    x, y, size = building
+    rect = plt.Rectangle((x, y), size, size, color='gray', alpha=0.5)
+    ax.add_patch(rect)
+
+
+# Define update function for animation
+def update(frame):
+    global positions, velocities, kdtree, trail_segments
+   
+    # Clear previous trail segments
+    for line in trail_segments:
+        line.remove()
+    trail_segments.clear()
+   
+    # Update unit positions based on velocities
+    positions += velocities
+   
+    # Apply wrap-around behavior to keep units within simulation area
+    positions = positions % 1
+   
+    # Update KD-tree with new positions
+    kdtree = cKDTree(positions)
+   
+    # Generate new trail segments and update velocities
+    for i in range(num_units):
+        # Query nearest neighbors to determine intensity
+        neighbor_indices = kdtree.query_ball_point(positions[i], neighbor_distance)
+        num_neighbors = len(neighbor_indices)
+       
+        # Calculate alignment, cohesion, and separation vectors
+        alignment = np.mean(velocities[neighbor_indices], axis=0) - velocities[i]
+        cohesion = np.mean(positions[neighbor_indices], axis=0) - positions[i]
+        separation = np.mean(positions[neighbor_indices], axis=0) - positions[i]
+       
+        # Update velocity based on alignment, cohesion, and separation
+        velocities[i] += (alignment_factor * alignment + cohesion_factor * cohesion - separation_factor * separation)
+       
+        # Avoid buildings
+        for building in buildings:
+            bx, by, bsize = building
+            dist = np.linalg.norm(positions[i] - np.array([bx + bsize / 2, by + bsize / 2]))
+            if dist < bsize:
+                velocities[i] += building_repulsion * (positions[i] - np.array([bx + bsize / 2, by + bsize / 2])) / (dist ** 2)
+       
+        # Limit maximum speed
+        speed = np.linalg.norm(velocities[i])
+        if speed > max_speed:
+            velocities[i] *= max_speed / speed
+       
+        # Generate trail segment
+        trail_x = [positions[i, 0]]
+        trail_y = [positions[i, 1]]
+        for neighbor_index in neighbor_indices:
+            trail_x.append(positions[neighbor_index, 0])
+            trail_y.append(positions[neighbor_index, 1])
+       
+        # Adjust color and alpha based on intensity
+        intensity = num_neighbors / num_units
+        trail, = ax.plot(trail_x, trail_y, 'o-', color='darkgreen', alpha=intensity*trail_decay)
+        trail_segments.append(trail)
+   
+    return trail_segments
+
+
+# Function to handle mouse click event
+def onclick(event):
+    global velocities
+    for i in range(num_units):
+        # Calculate vector from unit to mouse click position
+        click_position = np.array([event.xdata, event.ydata])
+        direction = click_position - positions[i]
+        # Normalize and scale the vector to adjust the velocity
+        if event.button == 1:
+            velocities[i] -= 0.05 * direction / np.linalg.norm(direction)  # Left click moves away
+        elif event.button == 3:
+            velocities[i] += 0.05 * direction / np.linalg.norm(direction)  # Right click moves towards
+
+
+# Attach mouse click event handler
+cid = fig.canvas.mpl_connect('button_press_event', onclick)
+
+
+# Create animation
+animation = FuncAnimation(fig, update, frames=num_iterations, interval=50, blit=True)
+
+
+plt.show()
