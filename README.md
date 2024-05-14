@@ -27,7 +27,7 @@ For example, to run `code1.py`:
 python code1.py
 ```
 
-## Notes
+# Notes
 
 - These scripts are experimental and may not function as expected.
 - Ensure you have Python installed on your system.
