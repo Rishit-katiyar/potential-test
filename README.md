@@ -33,7 +33,7 @@ python code1.py
 - Ensure you have Python installed on your system.
 - Feel free to contribute and improve the scripts.
 
-## Contributing
+# Contributing
 
 If you would like to contribute, please fork the repository, create a new branch, and submit a pull request. Any improvements or bug fixes are welcome.
 
