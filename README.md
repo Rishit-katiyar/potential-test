@@ -37,6 +37,3 @@ python code1.py
 
 If you would like to contribute, please fork the repository, create a new branch, and submit a pull request. Any improvements or bug fixes are welcome.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
