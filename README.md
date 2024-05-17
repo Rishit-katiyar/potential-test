@@ -1,19 +1,17 @@
-#  Potential-Test
 
-This repository contains a set of Python scripts that are designed to test potential functionalities. The scripts may work as intended, but there is no guarantee. Each script is listed below with a brief description.
+# Potential-Test
 
-# Files
+Welcome to the Potential-Test repository! This repository contains a set of Python scripts designed to test potential functionalities. While these scripts may work as intended, there is no guarantee. Feel free to explore, experiment, and contribute to the development of these scripts.
 
-## 1. **code1.py**
-   - Description: [Provide a brief description of what code1.py is supposed to do.]
+## Files
 
-## 2. **code2.py**
-   - Description: [Provide a brief description of what code2.py is supposed to do.]
+1. **initital-code.py**
 
-## 3. **code3.py**
-   - Description: [Provide a brief description of what code3.py is supposed to do.]
+2. **main.py**
 
-# Usage
+3. **test-code.py**
+
+## Usage
 
 To run any of the scripts, use the following command in your terminal:
 
@@ -21,19 +19,26 @@ To run any of the scripts, use the following command in your terminal:
 python <script_name>.py
 ```
 
-For example, to run `code1.py`:
+For example, to run `initital-code.py`:
 
 ```bash
-python code1.py
+python initital-code.py
 ```
 
-# Notes
+## Instructions for Contributing
 
-- These scripts are experimental and may not function as expected.
-- Ensure you have Python installed on your system.
-- Feel free to contribute and improve the scripts.
+If you would like to contribute to this project, follow these steps:
 
-# Contributing
+1. Fork the repository to your own GitHub account.
+2. Clone the repository to your local machine.
+3. Create a new branch for your changes: `git checkout -b feature/your-feature-name`.
+4. Make your changes to the code.
+5. Test your changes thoroughly.
+6. Commit your changes: `git commit -am 'Add some feature'`.
+7. Push to the branch: `git push origin feature/your-feature-name`.
+8. Submit a pull request.
 
-If you would like to contribute, please fork the repository, create a new branch, and submit a pull request. Any improvements or bug fixes are welcome.
+## License
+
+This project is licensed under the terms of the [GNU General Public License v3.0](LICENSE).
 
