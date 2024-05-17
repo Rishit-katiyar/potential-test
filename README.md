@@ -1,4 +1,4 @@
-# Potential-Test
+# Potential-Test.
 
 Welcome to the Potential-Test repository! This repository contains a set of Python scripts designed to test potential functionalities. While these scripts may work as intended, there is no guarantee. Feel free to explore, experiment, and contribute to the development of these scripts.
 
