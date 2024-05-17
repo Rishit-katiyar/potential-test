@@ -24,9 +24,9 @@ For example, to run `initital-code.py`:
 python initital-code.py
 ```
 
-## Instructions for Contributing
+# Instructions for Contributing
 
-If you would like to contribute to this project, follow these steps:
+### If you would like to contribute to this project, follow these steps:
 
 1. Fork the repository to your own GitHub account.
 2. Clone the repository to your local machine.
@@ -37,7 +37,7 @@ If you would like to contribute to this project, follow these steps:
 7. Push to the branch: `git push origin feature/your-feature-name`.
 8. Submit a pull request.
 
-## License
+# License
 
 This project is licensed under the terms of the [GNU General Public License v3.0](LICENSE).
 
