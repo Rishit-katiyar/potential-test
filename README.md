@@ -2,7 +2,7 @@
 
 Welcome to the Potential-Test repository! This repository contains a set of Python scripts designed to test potential functionalities. While these scripts may work as intended, there is no guarantee. Feel free to explore, experiment, and contribute to the development of these scripts.
 
-## Files
+# Files
 
 1. **initital-code.py**
 
@@ -26,7 +26,7 @@ python initital-code.py
 
 # Instructions for Contributing
 
-### If you would like to contribute to this project, follow these steps:
+If you would like to contribute to this project, follow these steps:
 
 1. Fork the repository to your own GitHub account.
 2. Clone the repository to your local machine.
