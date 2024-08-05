@@ -11,6 +11,7 @@
 
 
 
+
 import cv2
 
 # Load the Google Maps screenshot image
